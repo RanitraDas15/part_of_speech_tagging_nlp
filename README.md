@@ -58,7 +58,7 @@ In order to compute equation 1, I will create a `transition_counts` dictionary w
 #### Emission counts
 The second dictionary I will compute is the `emission_counts` dictionary. This dictionary will be used to compute:
 
-$$P(w_i|t_i)\tag{2}$$
+**P(w_i|t_i)***
 
 In other words, I will use it to compute the probability of a word given its tag. 
 In order to compute equation 2, I will create an `emission_counts` dictionary where 
