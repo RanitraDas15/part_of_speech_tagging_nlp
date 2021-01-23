@@ -1,7 +1,6 @@
 # Part-of-Speech-Tagging_NLP
 This project specializes in Natural Language Processing and is based on Part-of-Speech (POS) tagging, the process of assigning a part-of-speech tag (Noun, Verb, Adjective...) to each word in an input text.
 
-
 <a name='0'></a>
 # A: Data Sources
 This project will use two tagged data sets collected from the **Wall Street Journal (WSJ)**. 
