@@ -1,7 +1,7 @@
 import string
 
 
-# Punctuation characters
+# Punctuation characters.
 punct = set(string.punctuation)
 
 # Morphology rules used to assign unknown word tokens
