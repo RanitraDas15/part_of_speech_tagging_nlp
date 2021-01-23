@@ -36,8 +36,8 @@ In this project, I will start with the simplest possible parts-of-speech tagger 
 
 Note that, there are words that are not ambiguous. 
 - For example, the word `is` is a verb and it is not ambiguous. 
-- In the `WSJ` corpus, $86$% of the token are unambiguous (meaning they have only one tag) 
-- About $14\%$ are ambiguous (meaning that they have more than one tag)
+- In the `WSJ` corpus, 86% of the token are unambiguous (meaning they have only one tag) 
+- About 14\% are ambiguous (meaning that they have more than one tag)
 
 Before I start predicting the tags of each word, there is a need to compute a few dictionaries that will help us to generate the tables. 
 
@@ -46,9 +46,9 @@ Before I start predicting the tags of each word, there is a need to compute a fe
 - The first dictionary is the `transition_counts` dictionary which computes the number of times each tag happened next to another tag. 
 
 This dictionary will be used to compute: 
-$$P(t_i |t_{i-1}) \tag{1}$$
+***P(t_i |t_{i-1})***
 
-This is the probability of a tag at position $i$ given the tag at position $i-1$.
+This is the probability of a tag at position ***i*** given the tag at position ***i-1***.
 
 In order to compute equation 1, I will create a `transition_counts` dictionary where 
 - The keys are `(prev_tag, tag)`
