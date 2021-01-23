@@ -208,8 +208,7 @@ def viterbi_forward(A, B, test_corpus, best_probs, best_paths, vocab):
             best_path_i = None
             # For each POS tag that the previous word can be:
             for k in range(num_tags):
-                # Calculate the probability = best probs of POS tag k, previous word i-1 +
-                # log(prob of transition from POS k to POS j) + log(prob that emission of POS j is word i)
+                # Calculate the probability = best probs of POS tag k, previous word i-1 + log(prob of transition from POS k to POS j) + log(prob that emission of POS j is word i)
                 prob = (
                     best_probs[k, i - 1]
                     + math.log(A[k, j])
@@ -224,8 +223,7 @@ def viterbi_forward(A, B, test_corpus, best_probs, best_paths, vocab):
                     best_path_i = k
             # Save the best probability for the given current word's POS tag and the position of the current word inside the corpus
             best_probs[j, i] = best_prob_i
-            # Save the unique integer ID of the previous POS tag into best_paths matrix, for the POS tag of the current word
-            # and the position of the current word inside the corpus.
+            # Save the unique integer ID of the previous POS tag into best_paths matrix, for the POS tag of the current word and the position of the current word inside the corpus.
             best_paths[j, i] = best_path_i
     return best_probs, best_paths
 
@@ -244,8 +242,7 @@ def viterbi_backward(best_probs, best_paths, corpus, states):
     best_prob_for_last_word = float("-inf")
     # Initialize pred array, same length as corpus
     pred = [None] * m
-    # Go through each POS tag for the last word (last column of best_probs) in order to find the row (POS tag integer ID)
-    # with highest probability for the last word
+    # Go through each POS tag for the last word (last column of best_probs) in order to find the row (POS tag integer ID) with highest probability for the last word
     for k in range(num_tags):
         # If the probability of POS tag at row k is better than the previosly best probability for the last word:
         if best_probs[k, -1] > best_prob_for_last_word:
@@ -253,21 +250,17 @@ def viterbi_backward(best_probs, best_paths, corpus, states):
             best_prob_for_last_word = best_probs[k, -1]
             # Store the unique integer ID of the POS tag which is also the row number in best_probs
             z[m - 1] = k
-    # Convert the last word's predicted POS tag from its unique integer ID into the string representation
-    # using the 'states' dictionary store this in the 'pred' array for the last word
+    # Convert the last word's predicted POS tag from its unique integer ID into the string representation using the 'states' dictionary store this in the 'pred' array for the last word
     pred[m - 1] = states[k]
     # Find the best POS tags by walking backward through the best_paths
     # From the last word in the corpus to the 0th word in the corpus
     for i in range(len(corpus) - 1, -1, -1):
         # Retrieve the unique integer ID of the POS tag for the word at position 'i' in the corpus
         pos_tag_for_word_i = best_paths[np.argmax(best_probs[:, i]), i]
-        # In best_paths, go to the row representing the POS tag of word i
-        # and the column representing the word's position in the corpus
-        # to retrieve the predicted POS for the word at position i-1 in the corpus
+        # In best_paths, go to the row representing the POS tag of word i and the column representing the word's position in the corpus to retrieve the predicted POS for the word at position i-1 in the corpus
         z[i - 1] = best_paths[pos_tag_for_word_i, i]
         # Get the previous word's POS tag in string form
-        # Use the 'states' dictionary, where the key is the unique integer ID of the POS tag,
-        # and the value is the string representation of that POS tag
+        # Use the 'states' dictionary, where the key is the unique integer ID of the POS tag, and the value is the string representation of that POS tag
         pred[i - 1] = states[pos_tag_for_word_i]
     return pred
 
@@ -295,7 +288,5 @@ def compute_accuracy(pred, y):
     return num_correct / total
 
 
-print(
-    f"Accuracy of prediction using predict_pos is {predict_pos(prep, y, emission_counts, vocab, states):.4f}"
-)
+print(f"Accuracy of prediction using predict_pos is {predict_pos(prep, y, emission_counts, vocab, states):.4f}")
 print(f"Accuracy of the Viterbi algorithm is {compute_accuracy(pred, y):.4f}")
