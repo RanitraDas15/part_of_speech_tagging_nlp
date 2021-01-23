@@ -279,7 +279,7 @@ def compute_accuracy(pred, y):
             continue
         # store the word and tag separately
         word, tag = word_tag_tuple
-        # Check if the POS tag label matches the prediction
+        # Check if the POS tag label matches the prediction.
         if prediction == tag:
             # count the number of times that the prediction and label match
             num_correct += 1
@@ -289,4 +289,4 @@ def compute_accuracy(pred, y):
 
 
 print(f"Accuracy of prediction using predict_pos is {predict_pos(prep, y, emission_counts, vocab, states):.4f}")
-print(f"Accuracy of the Viterbi algorithm is {compute_accuracy(pred, y):.4f}")
+print(f"Accuracy of the Viterbi algorithm is {compute_accuracy(pred, y):.4f}") 
